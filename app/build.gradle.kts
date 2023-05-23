@@ -65,8 +65,9 @@ dependencies {
     implementation(libs.landscapist.bom)
     implementation(libs.landscapist.glide)
     implementation(libs.stream.chat)
+    implementation(libs.navigation.runtime.ktx)
+    implementation(libs.navigation.compose)
     implementation(libs.hilt.android)
-    implementation(libs.androidx.navigation.runtime.ktx)
     kapt(libs.hilt.compiler)
 
     testImplementation(libs.junit)
