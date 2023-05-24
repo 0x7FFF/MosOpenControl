@@ -3,13 +3,18 @@ package ru.gms.mosopencontrol
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import ru.gms.mosopencontrol.ui.component.text.Text
+import ru.gms.mosopencontrol.ui.component.text.TextViewState
 import ru.gms.mosopencontrol.ui.theme.MosOpenControlTheme
 
 class MainActivity : ComponentActivity() {
@@ -17,10 +22,17 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MosOpenControlTheme {
-                // A surface container using the 'background' color from the theme
+                val systemUiController = rememberSystemUiController()
+                SideEffect {
+                    systemUiController.setSystemBarsColor(
+                        color = Color.Transparent,
+                        darkIcons = true,
+                    )
+                }
+
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    color = MosOpenControlTheme.colorScheme.background
                 ) {
                     Greeting("Android")
                 }
@@ -32,8 +44,14 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
-        text = "Hello $name!",
+        state = TextViewState(
+            style = MosOpenControlTheme.typography.headlineMedium,
+            text = "Hello $name!",
+            color = MosOpenControlTheme.colorScheme.onBackground,
+        ),
         modifier = modifier
+            .fillMaxSize()
+            .wrapContentSize(),
     )
 }
 

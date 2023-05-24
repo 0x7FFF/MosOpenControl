@@ -1,18 +1,19 @@
 [versions]
 agp = "8.2.0-alpha04"
-kotlin = "1.8.10"
-core-ktx = "1.9.0"
+kotlin = "1.8.21"
+core-ktx = "1.10.1"
 junit = "4.13.2"
 androidx-test-ext-junit = "1.1.5"
 espresso-core = "3.5.1"
 lifecycle-runtime-ktx = "2.6.1"
 activity-compose = "1.7.1"
-compose-bom = "2023.03.00"
+compose-bom = "2023.05.01"
 compose-navigation = "2.5.3"
 landscapist-bom = "2.2.0"
 landscapist-glide = "2.2.0"
 hilt = "2.46.1"
 stream-chat = "5.17.3"
+accompanist = "0.30.1"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -35,7 +36,7 @@ landscapist-bom = { group = "com.github.skydoves", name = "landscapist-bom", ver
 landscapist-glide = { group = "com.github.skydoves", name = "landscapist-glide", version.ref = "landscapist-glide" }
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
-
+accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
