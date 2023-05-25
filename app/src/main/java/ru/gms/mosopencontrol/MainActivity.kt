@@ -3,7 +3,6 @@ package ru.gms.mosopencontrol
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.Surface
@@ -12,11 +11,15 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import dagger.hilt.android.AndroidEntryPoint
 import ru.gms.mosopencontrol.ui.component.text.Text
 import ru.gms.mosopencontrol.ui.component.text.TextViewState
+import ru.gms.mosopencontrol.ui.screens.auth.AuthScreen
 import ru.gms.mosopencontrol.ui.theme.MosOpenControlTheme
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +37,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MosOpenControlTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+//                    Greeting("Android")
+                    AuthScreen(
+                        hiltViewModel(),
+                    )
                 }
             }
         }
