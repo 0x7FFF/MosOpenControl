@@ -69,6 +69,7 @@ dependencies {
     implementation(libs.navigation.compose)
     implementation(libs.hilt.android)
     implementation(libs.accompanist.systemuicontroller)
+    implementation(libs.splashscreen)
     kapt(libs.hilt.compiler)
 
     testImplementation(libs.junit)
