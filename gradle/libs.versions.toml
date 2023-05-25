@@ -11,8 +11,10 @@ compose-bom = "2023.05.01"
 navigation = "2.5.3"
 landscapist = "2.2.0"
 hilt = "2.46.1"
+hilt-navigation = "1.0.0"
 stream-chat = "5.17.3"
 accompanist = "0.30.1"
+libphonenumber = "8.13.4"
 splashscreen = "1.0.1"
 
 [libraries]
@@ -36,8 +38,10 @@ navigation-compose = { group = "androidx.navigation", name = "navigation-compose
 stream-chat = { group = "io.getstream", name = "stream-chat-android-client", version.ref = "stream-chat" }
 landscapist-bom = { group = "com.github.skydoves", name = "landscapist-bom", version.ref = "landscapist" }
 landscapist-glide = { group = "com.github.skydoves", name = "landscapist-glide", version.ref = "landscapist" }
+libphonenumber = { group = "io.michaelrocks", name = "libphonenumber-android", version.ref = "libphonenumber"}
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
+hilt-navigation = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hilt-navigation" }
 accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
 splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashscreen" }
 
