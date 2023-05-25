@@ -71,6 +71,7 @@ dependencies {
     implementation(libs.hilt.navigation)
     implementation(libs.accompanist.systemuicontroller)
     implementation(libs.libphonenumber)
+    implementation(libs.splashscreen)
     kapt(libs.hilt.compiler)
 
     testImplementation(libs.junit)
