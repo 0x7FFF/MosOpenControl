@@ -68,7 +68,9 @@ dependencies {
     implementation(libs.navigation.runtime.ktx)
     implementation(libs.navigation.compose)
     implementation(libs.hilt.android)
+    implementation(libs.hilt.navigation)
     implementation(libs.accompanist.systemuicontroller)
+    implementation(libs.libphonenumber)
     kapt(libs.hilt.compiler)
 
     testImplementation(libs.junit)

@@ -12,6 +12,7 @@ val LightColorScheme = AppColorScheme(
     onTertiary = Color(0xFF212529),
     background = Color(0xFFFFFFFF),
     onBackground = Color(0xFF212529),
+    outline = Color(0x28212529), // 20 %
     surfaceVariant = Color(0x3C212529), // 30%
     outlineVariant = Color(0x64212529), // 50%
 )
@@ -27,6 +28,7 @@ class AppColorScheme(
     val onTertiary: Color,
     val background: Color,
     val onBackground: Color,
+    val outline: Color,
     val surfaceVariant: Color,
     val outlineVariant: Color,
 )
