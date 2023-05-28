@@ -69,8 +69,9 @@ class MainActivity : ComponentActivity() {
                         composable("main") {
                             ChatScreen(
                                 hiltViewModel(),
-                                navController,
-                            )
+                            ) {
+                                finish()
+                            }
                         }
                     }
                 }

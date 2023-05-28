@@ -8,6 +8,7 @@ package ru.gms.mosopencontrol.ui.screens.chat
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -17,7 +18,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
@@ -68,7 +71,7 @@ import ru.gms.mosopencontrol.ui.theme.MosOpenControlTheme
 @Composable
 fun ChatScreen(
     viewModel: ChatViewModel,
-    navController: NavController,
+    onBackClick: () -> Unit,
 ) {
     var messageText by remember { mutableStateOf("") }
     val messagesLocal by remember { viewModel.messages }
@@ -82,9 +85,7 @@ fun ChatScreen(
             modifier = Modifier
                 .fillMaxSize(),
         ) {
-            ChatHeader {
-                navController.popBackStack()
-            }
+            ChatHeader(onBack = onBackClick)
             Spacer(modifier = Modifier.height(16.dp))
             if (viewModel.messages.value.isEmpty()) {
                 Column(
@@ -190,12 +191,13 @@ fun BottomBar(
     val keyboardController = LocalSoftwareKeyboardController.current
 
     Row(
-        horizontalArrangement = Arrangement.SpaceBetween
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         IconButton(
             onClick = onAttachFile
         ) {
-            Icon(
+            Image(
                 painterResource(id = R.drawable.ic_chat_attach),
                 contentDescription = "Attach file"
             )
@@ -206,10 +208,9 @@ fun BottomBar(
             onValueChange = onMessageTextChanged,
             modifier = Modifier
                 .weight(1f)
-                .padding(horizontal = 8.dp)
+                .padding(horizontal = 8.dp, vertical = 0.dp)
                 .focusRequester(focusRequester)
-                .onFocusChanged { isFocused.value = it.isFocused }
-                .background(MaterialTheme.colorScheme.onPrimary),
+                .onFocusChanged { isFocused.value = it.isFocused },
             singleLine = true,
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
             keyboardActions = KeyboardActions(
@@ -217,11 +218,15 @@ fun BottomBar(
             ),
             shape = RoundedCornerShape(24.dp),
             colors = TextFieldDefaults.colors(
-                focusedTextColor = Color(0xFF212529),
-                unfocusedTextColor = Color(0xFF212529),
+                focusedTextColor = MosOpenControlTheme.colorScheme.secondary,
+                unfocusedTextColor = MosOpenControlTheme.colorScheme.secondary,
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,
                 disabledIndicatorColor = Color.Transparent,
+                focusedContainerColor = MosOpenControlTheme.colorScheme.tertiary,
+                unfocusedContainerColor = MosOpenControlTheme.colorScheme.tertiary,
+                errorContainerColor = MosOpenControlTheme.colorScheme.tertiary,
+                disabledContainerColor = MosOpenControlTheme.colorScheme.tertiary,
             )
         )
 
@@ -235,12 +240,12 @@ fun BottomBar(
             }
         ) {
             if (isFocused.value && messageText.isNotEmpty()) {
-                Icon(
+                Image(
                     painterResource(id = R.drawable.ic_chat_send),
                     contentDescription = "Send message"
                 )
             } else {
-                Icon(
+                Image(
                     painterResource(id = R.drawable.ic_chat_mic),
                     contentDescription = "Start voice message"
                 )
