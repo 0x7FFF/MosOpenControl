@@ -1,9 +1,9 @@
-package ru.gms.mosopencontrol.ui.screens.mainscreen.model.data
+package ru.gms.mosopencontrol.model.entity
 
 import androidx.annotation.DrawableRes
 import java.util.UUID
 
-data class User(
+data class MOSUser(
     val id: String = UUID.randomUUID().toString(),
     val name: String,
     val surname: String,

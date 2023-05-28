@@ -1,4 +1,4 @@
-package ru.gms.mosopencontrol.ui.screens.mainscreen.model.data
+package ru.gms.mosopencontrol.model.entity
 
 import androidx.annotation.DrawableRes
 

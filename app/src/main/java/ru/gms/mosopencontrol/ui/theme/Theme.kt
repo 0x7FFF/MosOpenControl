@@ -7,6 +7,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
+import io.getstream.chat.android.compose.ui.theme.ChatTheme
+import io.getstream.chat.android.compose.ui.theme.StreamColors
 
 
 @Composable
@@ -22,6 +24,23 @@ fun MosOpenControlTheme(
             content = content
         )
     }
+}
+
+@Composable
+fun MosOpenControlChatTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable () -> Unit,
+) {
+    val chatColors =
+        StreamColors.defaultColors().copy(
+            primaryAccent = MosOpenControlTheme.colorScheme.primary,
+            ownMessagesBackground = MosOpenControlTheme.colorScheme.tertiary
+        )
+
+    ChatTheme(
+        colors = chatColors,
+        content = content
+    )
 }
 
 object MosOpenControlTheme {
