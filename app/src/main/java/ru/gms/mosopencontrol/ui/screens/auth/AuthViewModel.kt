@@ -3,18 +3,24 @@ package ru.gms.mosopencontrol.ui.screens.auth
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import ru.gms.mosopencontrol.model.usecases.AuthUseCase
 import ru.gms.mosopencontrol.ui.screens.auth.Action.*
+import ru.gms.mosopencontrol.ui.utils.ResourceManager
+import ru.gms.mosopencontrol.ui.utils.formatError
 import javax.inject.Inject
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
     private val authUseCase: AuthUseCase,
+    private val resourceManager: ResourceManager,
 ) : ViewModel(),
     AuthUiCallback {
 
@@ -26,6 +32,9 @@ class AuthViewModel @Inject constructor(
         )
     )
     val state: StateFlow<AuthState> = _state.asStateFlow()
+
+    private val _navigateTo = MutableSharedFlow<String>()
+    val navigateTo: SharedFlow<String> = _navigateTo.asSharedFlow()
 
     private val reduce: (AuthState, Action) -> AuthState = { state, action ->
         when(action) {
@@ -39,7 +48,7 @@ class AuthViewModel @Inject constructor(
             is Error -> {
                 state.copy(
                     inProgress = false,
-                    error = action.error.message
+                    error = action.error.formatError(resourceManager)
                 )
             }
             is SuccessAuth -> {
@@ -57,7 +66,8 @@ class AuthViewModel @Inject constructor(
             try {
                 authUseCase(phoneNumber)
                 dispatch(SuccessAuth)
-            } catch (e: Exception) {
+                _navigateTo.emit("code/$phoneNumber")
+            } catch (e: Throwable) {
                 dispatch(Error(e))
             }
         }
@@ -70,6 +80,7 @@ class AuthViewModel @Inject constructor(
     private fun dispatch(action: Action) {
         _state.update { state -> reduce(state, action) }
     }
+
 }
 
 interface AuthUiCallback {

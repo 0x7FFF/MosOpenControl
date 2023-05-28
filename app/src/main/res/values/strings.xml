@@ -3,7 +3,14 @@
     
     <string name="auth_title">Авторизация</string>
     <string name="auth_subtitle">Пожалуйста введите номер телефона, мы\nотправим на него код подтверждения.</string>
-    <string name="auth_action_enter">Войти</string>
-    <string name="auth_action_reg">Создать аккаунт</string>
+    <string name="auth_action_enter">Продолжить</string>
     <string name="auth_phone_hint">+7 000 000 00 00</string>
+
+    <string name="auth_code_title">Введите код</string>
+    <string name="auth_code_subtitle">Мы отправили код подверждения\nна номер</string>
+    <string name="auth_code_incorrect">Код введен неверно</string>
+    <string name="auth_code_request">Запросить код повторно</string>
+
+    <string name="error_no_internet">Нет доступа к интернету. Проверьте ваше подключение.</string>
+    <string name="error_server_unknown">Сервер не отвечает. Мы это уже чиним 🚧</string>
 </resources>
