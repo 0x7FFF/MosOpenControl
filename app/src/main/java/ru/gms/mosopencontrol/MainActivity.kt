@@ -57,6 +57,7 @@ class MainActivity : ComponentActivity() {
                         composable("code") {
                             AuthCodeScreen(
                                 hiltViewModel(),
+                                navController,
                             )
                         }
                     }
