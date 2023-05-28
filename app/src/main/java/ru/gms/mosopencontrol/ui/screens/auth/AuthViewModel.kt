@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -33,7 +34,7 @@ class AuthViewModel @Inject constructor(
     val state: StateFlow<AuthState> = _state.asStateFlow()
 
     private val _navigateTo = MutableSharedFlow<String>()
-    val navigateTo = _navigateTo.asSharedFlow()
+    val navigateTo: SharedFlow<String> = _navigateTo.asSharedFlow()
 
     private val reduce: (AuthState, Action) -> AuthState = { state, action ->
         when(action) {
@@ -65,7 +66,7 @@ class AuthViewModel @Inject constructor(
             try {
                 authUseCase(phoneNumber)
                 dispatch(SuccessAuth)
-                _navigateTo.emit("code")
+                _navigateTo.emit("code/$phoneNumber")
             } catch (e: Throwable) {
                 dispatch(Error(e))
             }

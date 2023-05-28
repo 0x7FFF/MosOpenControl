@@ -7,6 +7,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -39,7 +40,7 @@ class AuthCodeViewModel @Inject constructor(
     val state: StateFlow<AuthCodeState> = _state.asStateFlow()
 
     private val _navigateTo = MutableSharedFlow<String>()
-    val navigateTo = _navigateTo.asSharedFlow()
+    val navigateTo: SharedFlow<String> = _navigateTo.asSharedFlow()
 
     private var countdownJob: Job? = null
 
@@ -48,6 +49,7 @@ class AuthCodeViewModel @Inject constructor(
             is Error -> {
                 state.copy(
                     inProgress = false,
+                    isSuccessVerify = null,
                     error = action.error.formatError(resourceManager)
                 )
             }
@@ -60,6 +62,7 @@ class AuthCodeViewModel @Inject constructor(
             is VerifyCode -> {
                 state.copy(
                     inProgress = true,
+                    isSuccessVerify = null,
                     error = null,
                 )
             }
@@ -104,7 +107,7 @@ class AuthCodeViewModel @Inject constructor(
 
     override fun onBackClick() {
         viewModelScope.launch {
-            _navigateTo.tryEmit("back")
+            _navigateTo.emit("back")
         }
     }
 
