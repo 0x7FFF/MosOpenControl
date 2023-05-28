@@ -11,14 +11,16 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import ru.gms.mosopencontrol.R
-
+import ru.gms.mosopencontrol.ui.component.text.Text
+import ru.gms.mosopencontrol.ui.component.text.TextViewState
+import ru.gms.mosopencontrol.ui.theme.MosOpenControlTheme
 
 @Composable
 fun InitialMessageCard() {
@@ -50,9 +52,19 @@ fun InitialMessageCard() {
                 horizontalAlignment = Alignment.Start,
             ) {
                 Spacer(modifier = Modifier.height(16.dp))
-                Text(text = "Что умеет бот ?", style = MaterialTheme.typography.bodyLarge)
+                Text(
+                    state = TextViewState(
+                        style = MosOpenControlTheme.typography.titleLarge,
+                        text = stringResource(id = R.string.chat_new_subtitle),
+                    )
+                )
                 Spacer(modifier = Modifier.height(8.dp))
-                Text(text = "Помощь по бизнесу", style = MaterialTheme.typography.bodyMedium)
+                Text(
+                    state = TextViewState(
+                        text = stringResource(id = R.string.chat_new_description),
+                        style = MosOpenControlTheme.typography.bodyMedium
+                    )
+                )
             }
         }
     }

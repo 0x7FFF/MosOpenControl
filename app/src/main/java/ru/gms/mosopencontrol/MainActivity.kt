@@ -1,8 +1,10 @@
 package ru.gms.mosopencontrol
 
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.wrapContentSize
@@ -22,11 +24,13 @@ import dagger.hilt.android.AndroidEntryPoint
 import ru.gms.mosopencontrol.ui.component.text.Text
 import ru.gms.mosopencontrol.ui.component.text.TextViewState
 import ru.gms.mosopencontrol.ui.screens.auth.AuthScreen
+import ru.gms.mosopencontrol.ui.screens.chat.ChatScreen
 import ru.gms.mosopencontrol.ui.screens.code.AuthCodeScreen
 import ru.gms.mosopencontrol.ui.theme.MosOpenControlTheme
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
@@ -63,17 +67,10 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         composable("main") {
-                            Box(modifier = Modifier.fillMaxSize()) {
-                                Text(
-                                    modifier = Modifier
-                                        .fillMaxSize()
-                                        .wrapContentSize(),
-                                    state = TextViewState(
-                                        text = "Main",
-                                        style = MosOpenControlTheme.typography.headlineLarge
-                                    )
-                                )
-                            }
+                            ChatScreen(
+                                hiltViewModel(),
+                                navController,
+                            )
                         }
                     }
                 }

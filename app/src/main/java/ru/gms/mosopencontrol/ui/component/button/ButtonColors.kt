@@ -19,6 +19,16 @@ object ButtonColors {
             )
         }
 
+    @Composable
+    fun onPrimaryColorScheme(): ButtonColorsScheme =
+        with(MosOpenControlTheme.colorScheme) {
+            ButtonColorsScheme(
+                containerColor = onPrimary,
+                contentColor = primary,
+                disabledContainerColor = onPrimary.toDisabledContainerColor(),
+                disabledContentColor = primary.toDisabledContentColor(),
+            )
+        }
 
     @Composable
     fun tertiaryColorScheme(): ButtonColorsScheme =

@@ -31,11 +31,13 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LargeTopAppBar
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -51,16 +53,22 @@ import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import ru.gms.mosopencontrol.R
 import ru.gms.mosopencontrol.model.entity.ChatMessage
+import ru.gms.mosopencontrol.ui.component.button.ButtonColors
+import ru.gms.mosopencontrol.ui.component.button.LargeButton
+import ru.gms.mosopencontrol.ui.component.button.TextButtonViewState
+import ru.gms.mosopencontrol.ui.theme.MosOpenControlTheme
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun ChatScreen(
     viewModel: ChatViewModel,
-    onBack: () -> Unit,
+    navController: NavController,
 ) {
     var messageText by remember { mutableStateOf("") }
     val messagesLocal by remember { viewModel.messages }
@@ -68,29 +76,32 @@ fun ChatScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.onPrimary),
+            .background(MosOpenControlTheme.colorScheme.background),
     ) {
         Column(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp)
+                .fillMaxSize(),
         ) {
-            ChatHeader(onBack = onBack)
+            ChatHeader {
+                navController.popBackStack()
+            }
             Spacer(modifier = Modifier.height(16.dp))
             if (viewModel.messages.value.isEmpty()) {
-                Spacer(modifier = Modifier.weight(1f))
-                InitialMessageCard()
-                Spacer(modifier = Modifier.weight(1f))
-                Button(
-                    onClick = {
-                        viewModel.onSendMessage("Начать")
-                    },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .wrapContentSize(Alignment.Center),
-                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.onPrimary)
+                Column(
+                    modifier = Modifier.padding(horizontal = 36.dp)
                 ) {
-                    Text(text = "Begin", color = Color.Red)
+                    Spacer(modifier = Modifier.weight(1f))
+                    InitialMessageCard()
+                    Spacer(modifier = Modifier.weight(1f))
+                    LargeButton(
+                        state = TextButtonViewState(
+                            text = stringResource(id = R.string.chat_new_go)
+                        ),
+                        modifier = Modifier.fillMaxWidth(),
+                        colorScheme = ButtonColors.onPrimaryColorScheme(),
+                    ) {
+                        viewModel.onSendMessage("Начать")
+                    }
                 }
             } else {
                 MessageList(
