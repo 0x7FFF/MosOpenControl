@@ -61,16 +61,12 @@ fun TextField(
         keyboardOptions = keyboardOptions,
         keyboardActions = keyboardActions,
         visualTransformation = visualTransformation,
-        label = {
+        placeholder = {
             if (!hint.isNullOrEmpty()) {
                 Text(
                     color = MosOpenControlTheme.colorScheme.outlineVariant,
-                    text = if (focusState) "" else hint,
-                    style = if (focusState) {
-                        MosOpenControlTheme.typography.bodySmall
-                    } else {
-                        MosOpenControlTheme.typography.bodyLarge
-                    },
+                    text = hint,
+                    style = MosOpenControlTheme.typography.bodyLarge,
                 )
             }
         },
