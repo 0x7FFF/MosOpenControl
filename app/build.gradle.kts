@@ -43,7 +43,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.3"
+        kotlinCompilerExtensionVersion = "1.4.7"
     }
     packaging {
         resources {
@@ -65,7 +65,16 @@ dependencies {
     implementation(libs.landscapist.bom)
     implementation(libs.landscapist.glide)
     implementation(libs.stream.chat)
+    implementation(libs.stream.compose)
+    implementation(libs.stream.log)
+    implementation(libs.navigation.runtime.ktx)
+    implementation(libs.navigation.compose)
     implementation(libs.hilt.android)
+    implementation(libs.hilt.navigation)
+    implementation(libs.accompanist.systemuicontroller)
+    implementation(libs.libphonenumber)
+    implementation(libs.splashscreen)
+    implementation(libs.androidx.startup.runtime)
     kapt(libs.hilt.compiler)
 
     testImplementation(libs.junit)
