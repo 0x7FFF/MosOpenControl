@@ -29,15 +29,15 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.gms.mosopencontrol.R
-import ru.gms.mosopencontrol.ui.screens.mainscreen.model.data.MainListItem
-import ru.gms.mosopencontrol.ui.screens.mainscreen.model.data.MainListItemAction
-import ru.gms.mosopencontrol.ui.screens.mainscreen.model.data.User
+import ru.gms.mosopencontrol.model.entity.MainListItem
+import ru.gms.mosopencontrol.model.entity.MainListItemAction
+import ru.gms.mosopencontrol.model.entity.MOSUser
 import ru.gms.mosopencontrol.ui.component.text.Text
 import ru.gms.mosopencontrol.ui.component.text.TextViewState
 import ru.gms.mosopencontrol.ui.theme.MosOpenControlTheme
 
 @Composable
-fun MainScreen(user: User, listItems: List<MainListItem>) {
+fun MainScreen(user: MOSUser, listItems: List<MainListItem>) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -59,7 +59,7 @@ fun MainScreen(user: User, listItems: List<MainListItem>) {
 }
 
 @Composable
-fun Header(user: User) {
+fun Header(user: MOSUser) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween
@@ -177,7 +177,7 @@ fun ListItemCard(listItem: MainListItem, onListItemAction: (MainListItemAction) 
 fun PreviewMainScreen() {
     MosOpenControlTheme {
         MainScreen(
-            user = User(
+            user = MOSUser(
                 name = "Дмитрий",
                 surname = "Сохин",
                 avatarResId = null
