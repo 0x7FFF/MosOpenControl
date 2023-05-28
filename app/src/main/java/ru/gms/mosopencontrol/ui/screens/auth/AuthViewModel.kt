@@ -10,11 +10,10 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import ru.gms.mosopencontrol.R
 import ru.gms.mosopencontrol.model.usecases.AuthUseCase
 import ru.gms.mosopencontrol.ui.screens.auth.Action.*
 import ru.gms.mosopencontrol.ui.utils.ResourceManager
-import java.io.IOException
+import ru.gms.mosopencontrol.ui.utils.formatError
 import javax.inject.Inject
 
 @HiltViewModel
@@ -48,7 +47,7 @@ class AuthViewModel @Inject constructor(
             is Error -> {
                 state.copy(
                     inProgress = false,
-                    error = action.error.formatError()
+                    error = action.error.formatError(resourceManager)
                 )
             }
             is SuccessAuth -> {
@@ -81,13 +80,6 @@ class AuthViewModel @Inject constructor(
         _state.update { state -> reduce(state, action) }
     }
 
-    private fun Throwable.formatError(): String =
-        when (this) {
-            is IOException ->
-                resourceManager.getString(R.string.error_no_internet)
-            else ->
-                resourceManager.getString(R.string.error_server_unknown)
-        }
 }
 
 interface AuthUiCallback {
