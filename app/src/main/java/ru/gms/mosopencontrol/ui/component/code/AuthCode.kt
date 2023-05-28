@@ -3,6 +3,7 @@ package ru.gms.mosopencontrol.ui.component.code
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -46,6 +47,7 @@ fun AuthCode(
     var textState by remember { mutableStateOf("") }
     var codes by remember { mutableStateOf(List(5) { "" }) }
     var current by remember { mutableStateOf(0) }
+    val source = remember { MutableInteractionSource() }
 
     Box(
         modifier = modifier
@@ -107,7 +109,11 @@ fun AuthCode(
             codes.forEachIndexed { index, code ->
                 Text(
                     modifier = Modifier
-                        .clickable { focusRequester.requestFocus() }
+                        .clickable(
+                            interactionSource = source,
+                            indication = null,
+                            onClick = { focusRequester.requestFocus() },
+                        )
                         .size(width = 42.dp, height = 48.dp)
                         .border(
                             width = 1.dp,
