@@ -79,25 +79,3 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        state = TextViewState(
-            style = MosOpenControlTheme.typography.headlineMedium,
-            text = "Hello $name!",
-            color = MosOpenControlTheme.colorScheme.onBackground,
-        ),
-        modifier = modifier
-            .fillMaxSize()
-            .wrapContentSize(),
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    MosOpenControlTheme {
-        Greeting("Android")
-    }
-}
