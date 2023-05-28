@@ -121,7 +121,8 @@ fun AuthCodeContent(
                     ) {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_back),
-                            contentDescription = "Back"
+                            contentDescription = "Back",
+                            tint = MosOpenControlTheme.colorScheme.primary,
                         )
                     }
                 }
